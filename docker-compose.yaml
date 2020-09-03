@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  dictate-client:
+    image: dfox11/dictate-client
+    ports:
+      - '3000:3000'
+
+  speech-to-text:
+    image: dfox11/speech-to-text
+    ports:
+      - '4000:4000'
+    volumes:
+      - .:/app
+      - ./dictate-287108-263ff098bd87.json:/secrets/key.json
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/secrets/key.json
