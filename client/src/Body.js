@@ -85,7 +85,8 @@ export default class Body extends React.Component {
 
     socket.on('speechData', (data) => {
       console.log(data);
-      this.setState({ contents: data });
+      const newData = this.state.contents.concat(data);
+      this.setState({ contents: newData });
     });
 
     /*

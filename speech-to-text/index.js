@@ -56,6 +56,7 @@ function startRecognitionStream(client, recognizeStream) {
       */
 
       client.emit('speechData', output);
+      output = '';
 
       // if end of utterance, let's restart stream
       // this is a small hack. After 65 seconds of silence, the stream will still throw an error for speech length limit
