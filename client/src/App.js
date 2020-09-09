@@ -5,10 +5,5 @@ import Head from './Head';
 import RichEditorExample from './draft-js/RichEditorExample';
 
 export default () => {
-  return (
-    <div>
-      <Head />
-      <Body />
-    </div>
-  );
+  return <Body />;
 };
