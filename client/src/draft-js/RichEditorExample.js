@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import Draft from 'draft-js';
 import './rich-editor-example.css';

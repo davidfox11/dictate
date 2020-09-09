@@ -1,9 +1,13 @@
 import React from 'react';
+import './css/bootstrap.css';
+import './css/responsive.css';
+import './css/style.css';
 import socketIOClient from 'socket.io-client';
 //import RichEditorExample from './draft-js/RichEditorExample';
 import Draft, { convertFromRaw } from 'draft-js';
 import './draft-js/rich-editor-example.css';
 import { Modifier, ContentState } from 'draft-js';
+import logo from './images/logo.png';
 
 export default class Body extends React.Component {
   constructor(props) {
@@ -225,6 +229,7 @@ export default class Body extends React.Component {
       }
     }
 
+    /*
     return (
       <div>
         <div className="jumbotron text-center">
@@ -350,6 +355,159 @@ export default class Body extends React.Component {
           integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
           crossOrigin="anonymous"
         ></script>
+      </div>
+    );
+    */
+
+    return (
+      <div className="hero_area">
+        <header class="header_section">
+          <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+              <a class="navbar-brand" href="index.html">
+                <img src={logo} alt="" />
+                <span>NoteNow</span>
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                  <ul class="navbar-nav  ">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="">
+                        Home <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">
+                        {' '}
+                        Help
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center">
+                  <a href="">Templates</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-3">
+              <h3>Popular Templates</h3>
+              <button
+                id="letterTemplate"
+                onClick={this.addLetter}
+                type="button"
+                className="text-uppercase custom_orange-btn mr-3"
+                style={templateStyle}
+              >
+                Letter
+              </button>
+              <button
+                id="sickNote"
+                onClick={this.addSickNote}
+                type="button"
+                className="text-uppercase custom_orange-btn mr-3"
+                style={templateStyle}
+              >
+                Sick Leave
+              </button>
+              <hr />
+              <h3>Record</h3>
+              <button id="record" style={recordStyle}>
+                <svg
+                  onClick={this.enableSpeech}
+                  width="3em"
+                  height="3em"
+                  viewBox="0 0 16 16"
+                  className="bi bi-mic-fill"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"
+                  />
+                </svg>
+              </button>
+              <button
+                style={buttonStyle}
+                id="stop"
+                onClick={this.stopRecording}
+              >
+                stop
+              </button>
+              <p>{this.state.loading}</p>
+            </div>
+            <div className="row">
+              <div className="col-20">
+                <div className="RichEditor-root">
+                  <BlockStyleControls
+                    editorState={this.state.editorState}
+                    onToggle={this.toggleBlockType}
+                  />
+                  <InlineStyleControls
+                    editorState={this.state.editorState}
+                    onToggle={this.toggleInlineStyle}
+                  />
+                  <div className={className} onClick={this.focus}>
+                    <Editor
+                      blockStyleFn={getBlockStyle}
+                      customStyleMap={styleMap}
+                      editorState={this.state.editorState}
+                      handleKeyCommand={this.handleKeyCommand}
+                      onChange={this.onChange}
+                      onTab={this.onTab}
+                      placeholder="Begin typing..."
+                      ref="editor"
+                      spellCheck={true}
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={this.copyToClipboard}
+                  type="button"
+                  className="text-uppercase custom_dark-btn mr-3"
+                >
+                  Copy Text
+                </button>
+                <button
+                  type="button"
+                  className="text-uppercase custom_dark-btn mr-3"
+                >
+                  Email Text
+                </button>
+                <button
+                  type="button"
+                  className="text-uppercase custom_dark-btn mr-3"
+                  onClick={this.resetEditor}
+                >
+                  Reset Editor
+                </button>
+                <hr />
+                <p style={{ color: 'gray' }}>
+                  Tip: to switch between different applications, use Alt + Tab
+                  (Windows) or command + Tab (Mac).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
